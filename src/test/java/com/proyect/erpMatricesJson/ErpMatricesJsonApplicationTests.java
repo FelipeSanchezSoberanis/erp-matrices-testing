@@ -24,7 +24,7 @@ class ErpMatricesJsonApplicationTests {
 
     @Test
     @Rollback(false)
-    void saveUserDefinedTableRow() {
+    void testRowSave() {
         Map<String, Object> dataToSave = new HashMap<>();
         dataToSave.put("name", "Felipe");
         dataToSave.put("age", 23);
