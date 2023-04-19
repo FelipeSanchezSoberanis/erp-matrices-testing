@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 import java.util.Optional;
@@ -14,6 +15,9 @@ import java.util.Set;
 
 @Service
 public class UserDefinedTableRowService {
+
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
+            DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
     @Autowired private UserDefinedTableRowRepository userDefinedTableRowRepo;
 
@@ -39,7 +43,8 @@ public class UserDefinedTableRowService {
         for (String key : keys) {
             Object object = data.get(key);
             if (object instanceof ZonedDateTime) {
-                data.put(key, object.toString());
+                ZonedDateTime zonedDateTime = (ZonedDateTime) object;
+                data.put(key, zonedDateTime.format(DATE_TIME_FORMATTER));
             }
         }
 
@@ -54,7 +59,8 @@ public class UserDefinedTableRowService {
         for (String key : keys) {
             Object object = data.get(key);
             try {
-                ZonedDateTime zonedDateTime = ZonedDateTime.parse(object.toString());
+                ZonedDateTime zonedDateTime =
+                        ZonedDateTime.parse(object.toString(), DATE_TIME_FORMATTER);
                 data.put(key, zonedDateTime);
             } catch (DateTimeParseException ex) {
 
