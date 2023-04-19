@@ -30,6 +30,7 @@ class ErpMatricesJsonApplicationTests {
         dataToSave.put("age", 23);
         dataToSave.put("time", ZonedDateTime.now());
         dataToSave.put("boolean", true);
+        dataToSave.put("Nombre con mamádas ¬|·½½¬·||·|", "Hola");
 
         UserDefinedTableRow rowToSave = new UserDefinedTableRow();
         rowToSave.setData(dataToSave);
